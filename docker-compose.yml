@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis-practice
+    ports:
+      - "6379:6379"   # Redis port exposed to host
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-commander
+    environment:
+      - REDIS_HOSTS=local:redis:6379   # Connects to the Redis container
+    ports:
+      - "8081:8081"   # Browser UI port
+    depends_on:
+      - redis
